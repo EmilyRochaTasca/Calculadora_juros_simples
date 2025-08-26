@@ -1,0 +1,9 @@
+python -m pytest --html=doc_testes.html
+python -m pytest --cov=. --cov-report=html
+
+
+OQ ENVIAR AO ALEX:
+
+->calculadora_financeira.py
+->doc_teste.pdf
+->doc_teste_cobertura.pdf
