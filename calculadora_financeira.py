@@ -1,40 +1,30 @@
-"""
-Módulo para cálculos financeiros básicos.
-"""
-
 def calcular_juros_simples(capital_inicial: float, taxa_anual: float, tempo_anos: float) -> float:
     """
     Calcula o montante final de um investimento com base na fórmula de juros simples.
 
-    Esta função aplica a taxa de juros sobre o capital inicial durante o
-    período especificado e retorna a soma do capital com os juros acumulados.
-
-    A fórmula utilizada é: M = C * (1 + (i * t)), onde:
-      - M = Montante final
-      - C = Capital inicial
-      - i = Taxa de juros (em formato decimal)
-      - t = Tempo
+    M = C * (1 + (i * t)), onde i é a taxa em formato decimal (i/100).
 
     Args:
-        capital_inicial (float): O valor do capital inicial a ser investido.
-            Ex: 1000.00
-        taxa_anual (float): A taxa de juros anual em formato percentual.
-            Ex: 5 para 5%
-        tempo_anos (float): O período do investimento, em anos. Pode ser fracionado.
-            Ex: 2.5 para dois anos e meio.
+        capital_inicial (float): Valor do capital inicial (não-negativo).
+        taxa_anual (float): Taxa de juros anual em percentual (não-negativo).
+        tempo_anos (float): Tempo do investimento em anos (não-negativo).
 
     Returns:
-        float: O montante final (capital + juros), arredondado para 2 casas decimais.
+        float: Montante final (capital + juros).
 
     Raises:
-        ValueError: Se qualquer um dos argumentos (capital, taxa, tempo)
-            for um valor negativo.
-
-    Example:
-        >>> calcular_juros_simples(1000.00, 5.0, 2.0)
-        1100.00
-        >>> calcular_juros_simples(2500.00, 3.5, 10.0)
-        3375.00
+        ValueError: Se algum argumento for negativo.
+        TypeError: Se algum argumento não for numérico.
     """
-    
-    return 0
+    # Validação de tipos
+    if not all(isinstance(x, (int, float)) for x in (capital_inicial, taxa_anual, tempo_anos)):
+        raise TypeError("Todos os parâmetros devem ser números.")
+
+    # Validação de valores não-negativos
+    if capital_inicial < 0 or taxa_anual < 0 or tempo_anos < 0:
+        raise ValueError("Todos os parâmetros devem ser valores não-negativos.")
+
+    # Cálculo do montante usando juros simples
+    montante = capital_inicial * (1 + (taxa_anual / 100) * tempo_anos)
+
+    return round(montante, 2)
